@@ -17,6 +17,7 @@
 
     <script>
         document.querySelector('#btn1').addEventListener('click', loadUser);
+        document.querySelector('#btn2').addEventListener('click', loadUsers);
 
         function loadUser(){
             var xhr = new XMLHttpRequest();
@@ -38,6 +39,37 @@
                     
                     // Pushing the output html to div
                     document.querySelector('#user').innerHTML = output;
+
+                } else if(this.status == 404){
+                    console.log("Not found")
+                }
+            }
+
+            xhr.send()
+        }
+        
+        function loadUsers(){
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'users.json', true);
+
+            xhr.onload = function(){
+                if(this.status == 200){
+                    // Parsing JSON string to JSON Object
+                    const users = JSON.parse(this.response);
+                    var output = '';
+                    // Creating HTML for displaying data
+                    for(var i in users){
+
+                    output += 
+                        '<ul>'+
+                            '<li>ID: '+ users[i].id +'</li>'+
+                            '<li>Name: '+ users[i].name +'</li>'+
+                            '<li>Email: '+ users[i].email +'</li>'
+                        +'</ul>';
+                    }
+                    // Pushing the output html to div
+                    document.querySelector('#users').innerHTML = output;
 
                 } else if(this.status == 404){
                     console.log("Not found")
