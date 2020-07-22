@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 2 | Local JSON</title>
+</head>
+<body>
+    <button id="btn1">Get User</button>
+    <button id="btn2">Get Users</button>
+    <br><br>
+    <h1>User</h1>
+    <div id="user"></div>
+    <br><br>
+    <h1>Users</h1>
+    <div id="users"></div>
+
+    <script>
+        document.querySelector('#btn1').addEventListener('click', loadUser);
+
+        function loadUser(){
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'user.json', true);
+
+            xhr.onload = function(){
+                if(this.status == 200){
+                    // Parsing JSON string to JSON Object
+                    const user = JSON.parse(this.response);
+
+                    // Creating HTML for displaying data
+                    const output = 
+                        '<ul>'+
+                            '<li>ID: '+ user.id +'</li>'+
+                            '<li>Name: '+ user.name +'</li>'+
+                            '<li>Email: '+ user.email +'</li>'
+                        +'</ul>';
+                    
+                    // Pushing the output html to div
+                    document.querySelector('#user').innerHTML = output;
+
+                } else if(this.status == 404){
+                    console.log("Not found")
+                }
+            }
+
+            xhr.send()
+        }
+    </script>
+</body>
+</html>
