@@ -24,12 +24,26 @@
 
             // NEW Way to do AJAX requests
 
-            xhr.onload = function(){
-                if(xhr.status == 200){
-                    console.log(xhr.responseText);
+            // xhr.onload = function(){
+            //     if(xhr.status == 200){
+            //         // console.log(xhr.responseText);
+            //     }
+            // }
+
+            // OLD Way to do AJAX requests
+
+            // READYSTATE VALUES
+            // 0: request not initialized
+            // 1: server connection established
+            // 2: request recieved
+            // 3: processing request
+            // 4: request finished and response is ready
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200){
+                    console.log(this.responseText);
                 }
             }
-
 
             
 
