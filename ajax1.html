@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX - 1</title>
+</head>
+<body>
+    <button id="button">Get Text File</button>
+    <script>
+        // create an event listener
+        document.getElementById("button").addEventListener("click", loadText);
+        function loadText(){
+            // Create XHR Object
+            var xhr = new XMLHttpRequest();
+            
+            // HTTP STATUSES
+            // 200: "OK"
+            // 403: "Forbidden"
+            // 404: "Not Found"
+
+            // OPEN - type, url/filename, async(true or false)
+            xhr.open('GET', 'sample.txt', true);
+
+            // NEW Way to do AJAX requests
+
+            xhr.onload = function(){
+                if(xhr.status == 200){
+                    console.log(xhr.responseText);
+                }
+            }
+
+
+            
+
+            // Sends request
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
