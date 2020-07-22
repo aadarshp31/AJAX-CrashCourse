@@ -19,16 +19,26 @@
             // 403: "Forbidden"
             // 404: "Not Found"
 
-            // OPEN - type, url/filename, async(true or false)
+            // OPEN - req-type, url/filename, async(true or false)
             xhr.open('GET', 'sample.txt', true);
 
-            // NEW Way to do AJAX requests
+            // OPTIONAL Progress/loading handler || //readystate = 3
+            xhr.onprogress = function(){
+                console.log("Loading...");
+            }
 
-            // xhr.onload = function(){
-            //     if(xhr.status == 200){
-            //         // console.log(xhr.responseText);
-            //     }
-            // }
+            // NEW Way to do AJAX requests || onload directly runs on //readystate = 4
+            xhr.onload = function(){
+                if(xhr.status == 200){
+                    // console.log(xhr.responseText);
+                }
+            }
+
+            // Error handler
+            xhr.onerror = function(){
+                console.log("Request error");
+            }
+
 
             // OLD Way to do AJAX requests
 
@@ -39,11 +49,11 @@
             // 3: processing request
             // 4: request finished and response is ready
 
-            xhr.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200){
-                    console.log(this.responseText);
-                }
-            }
+            // xhr.onreadystatechange = function() {
+            //     if(this.readyState == 4 && this.status == 200){
+            //         console.log(this.responseText);
+            //     }
+            // }
 
             
 
