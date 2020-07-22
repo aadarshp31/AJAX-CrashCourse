@@ -7,6 +7,9 @@
 </head>
 <body>
     <button id="button">Get Text File</button>
+    <br><br>
+    <div id="text"></div>
+
     <script>
         // create an event listener
         document.getElementById("button").addEventListener("click", loadText);
@@ -24,13 +27,17 @@
 
             // OPTIONAL Progress/loading handler || //readystate = 3
             xhr.onprogress = function(){
-                console.log("Loading...");
+                // console.log("Loading...");
+                document.getElementById('text').innerHTML = "Loading...";
             }
 
             // NEW Way to do AJAX requests || onload directly runs on //readystate = 4
             xhr.onload = function(){
                 if(xhr.status == 200){
                     // console.log(xhr.responseText);
+                    document.getElementById('text').innerHTML = xhr.responseText;
+                } else if(xhr.status == 404){
+                    document.querySelector('#text').innerHTML = "Not Found";
                 }
             }
 
