@@ -15,13 +15,22 @@
         <input type="submit" value="submit">
     </form>
 
+    <h3>GET Form | AJAX</h3>
+    <form id="getForm" method="GET" action="process.php">
+        <input type="text" name="name" id="name" required>
+        <input type="submit" value="submit">
+    </form>
+
     <script>
         document.getElementById('btn').addEventListener('click', getName);
+        document.getElementById('getForm').addEventListener('submit', getName);
         
-        function getName(){
-            var xhr = new XMLHttpRequest();
+        function getName(event){
+            event.preventDefault();
+            var name = document.getElementById('name').value;
 
-            xhr.open('GET', 'process.php', true);
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'process.php?name=' + name, true);
 
             xhr.onload = function(){
                 if(this.status == 200){
